@@ -12,11 +12,10 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/scene.fxml"));
+        loader.setLocation(getClass().getResource("/index.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
         stage.setTitle("Addition Quiz");
         stage.setScene(scene);
@@ -28,3 +27,8 @@ public class MainApp extends Application {
     }
 
 }
+
+// TODO Countdown Clock
+// TODO Read from file
+// TODO Game Mechanics
+// TODO Database

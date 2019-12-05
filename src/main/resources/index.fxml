@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.valenciacollege.IndexController">
+   <Text layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 30px; -fx-font-family: Callibri;"
+         text="The Addition Quiz" textAlignment="CENTER" wrappingWidth="600.0">
+      <font>
+         <Font name="Arial" size="12.0"/>
+      </font>
+   </Text>
+   <Text layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Final Java Project by Mark Hall"
+         textAlignment="CENTER" wrappingWidth="600.0">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Text>
+   <TextField fx:id="nameField" alignment="CENTER" layoutX="226.0" layoutY="250.0" promptText="Enter Name"
+              text="Enter Name"/>
+   <Button layoutX="275.0" layoutY="287.0" mnemonicParsing="false" onAction="#changeSceneToApplication"
+           style="-fx-background-color: #0275d8;" text="Begin" textFill="WHITE"/>
+</AnchorPane>
