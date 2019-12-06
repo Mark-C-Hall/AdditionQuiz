@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -12,13 +10,13 @@
    <children>
       <Text fx:id="nameLabel" layoutX="69.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
       <Text layoutX="212.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points Total" AnchorPane.leftAnchor="175.0" AnchorPane.topAnchor="50.0" />
-      <Text layoutX="367.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Countdown Clock" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="50.0" />
+      <Text fx:id="timeLabel" layoutX="367.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="50.0" />
       <Text layoutX="77.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Object 1" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="250.0" />
       <Text layoutX="356.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Object 2" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="250.0" />
-      <Button layoutX="79.0" layoutY="609.0" mnemonicParsing="false" text="Choice 1" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="500.0" />
-      <Button layoutX="160.0" layoutY="609.0" mnemonicParsing="false" text="Choice 2" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="500.0" />
-      <Button layoutX="341.0" layoutY="543.0" mnemonicParsing="false" text="Choice 3" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="500.0" />
-      <Button layoutX="461.0" layoutY="543.0" mnemonicParsing="false" text="Choice 4" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="500.0" />
+      <Button layoutX="79.0" layoutY="609.0" mnemonicParsing="false" onAction="#submitAnswer" text="Choice 1" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="500.0" />
+      <Button layoutX="160.0" layoutY="609.0" mnemonicParsing="false" onAction="#submitAnswer" text="Choice 2" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="500.0" />
+      <Button layoutX="341.0" layoutY="543.0" mnemonicParsing="false" onAction="#submitAnswer" text="Choice 3" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="500.0" />
+      <Button layoutX="461.0" layoutY="543.0" mnemonicParsing="false" onAction="#submitAnswer" text="Choice 4" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="500.0" />
       <Button layoutX="248.0" layoutY="686.0" mnemonicParsing="false" text="Generate Report" textAlignment="CENTER" AnchorPane.topAnchor="600.0" />
       <VBox layoutX="450.0" layoutY="25.0" prefHeight="500.0" prefWidth="130.0" style="-fx-background-color: yellow;" />
       <Line endX="10.0" layoutX="200.0" layoutY="259.0" startX="-10.0" />

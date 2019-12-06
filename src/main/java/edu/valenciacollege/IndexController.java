@@ -25,7 +25,7 @@ public class IndexController {
 
             ApplicationController controller = loader.getController();
 
-            controller.initData(nameField.getText());
+            controller.initialize(nameField.getText());
             Scene applicationViewScene = new Scene(applicationViewParent);
 
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
