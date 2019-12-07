@@ -6,8 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
-public class MainApp extends Application {
+/*
+ * Mark Hall
+ * December 9th 2019
+ * Advanced Java COP 2805C
+ * Final Java Project
+ */
+public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -28,7 +33,6 @@ public class MainApp extends Application {
 
 }
 
-// TODO Countdown Clock
 // TODO Read from file
 // TODO Game Mechanics
 // TODO Database

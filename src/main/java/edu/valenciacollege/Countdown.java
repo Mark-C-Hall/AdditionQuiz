@@ -2,35 +2,41 @@ package edu.valenciacollege;
 
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class Countdown  {
-    StringProperty timeProperty  = new SimpleStringProperty(this, "timeProperty", "5.00");
 
-    public void restartClock() {
-        Timer timer = new Timer();
-        MyTimerTask task = new MyTimerTask(timer);
+public class Countdown implements Runnable {
+    // TimeProperty binds the numerical value to the visual text.
+    StringProperty timeProperty = new SimpleStringProperty(this, "timeProperty", "5.0");
+    // Flag for exiting Thread.
+    private volatile boolean exit;
 
-        timer.schedule(task, 0, 100);
+    Countdown() {
+        this.exit = false;
+        Thread thread = new Thread(this);
+        thread.start();
     }
 
-    private class MyTimerTask extends TimerTask {
-        private final Timer timer;
-        Double time;
+    @Override
+    public void run() {
+        this.runTimer();
+    }
 
-        public MyTimerTask(Timer timer) {
-            this.timer = timer;
-            time = Double.valueOf(timeProperty.getValue());
-        }
+    public void stop() {
+        this.exit = true;
+    }
 
-        @Override
-        public void run() {
-            time -= 0.1;
-            if (time <= 0) {
-                timer.cancel();
+    // Deacreases time value every 1/10th of a second.
+    private void runTimer() {
+        double time = Double.parseDouble(timeProperty.getValue());
+
+        while (time > 0 && !exit) {
+            try {
+                time -= 0.1;
+                timeProperty.setValue(String.valueOf(time).substring(0, 3));  // Sets float to string and selects
+                Thread.sleep(100);                                      // first for characters.
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
             }
-            timeProperty.setValue(String.valueOf(time).substring(0, 3));
         }
     }
 }
