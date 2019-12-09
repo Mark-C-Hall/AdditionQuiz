@@ -33,6 +33,5 @@ public class Main extends Application {
 
 }
 
-// TODO Read from file
 // TODO Game Mechanics
 // TODO Database
