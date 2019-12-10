@@ -10,41 +10,59 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.Stack;
 
+/*
+ * Controller class for main JavaFX Application.
+ */
 public class ApplicationController {
+    // JavaFX Nodes.
     @FXML Text nameLabel, timeLabel, pointsLabel;
     @FXML Text objectLabel1, objectLabel2;
     @FXML Button answerLabel1, answerLabel2, answerLabel3, answerLabel4, reportButton;
     @FXML VBox vbox;
 
-    String name;
-    int points;
-    Countdown countdown;
-    QuestionAndAnswerState qState;
-    Stack<String> timeStamps;
-    QuizDatabase db;
+    // Class fields.
+    private String name;
+    private int points;
+    private Countdown countdown;
+    private QuestionAndAnswerState qState;
+    private Stack<String> timeStamps;
+    private QuizDatabase db;
 
     // Starting Parameters for first question.
     void initialize(String name) {
         this.name = name;
         this.points = 0;
-        nameLabel.setText("Name: " + name);
-        startClock();
-        try {
-            qState = new QuestionAndAnswerState();
-            bindTextToState();
-        } catch (IOException e) {
-            System.out.println("Caught: " + e.getMessage());
-        }
-        bindPoints();
+
+        // Intialize objects.
+        qState = new QuestionAndAnswerState();
         timeStamps = new Stack<>();
         db = new QuizDatabase();
         db.connectToDb();
+
+
+        // Bind JavaFX Properties.
+        nameLabel.setText("Name: " + name);
+        bindTextToState();
+        bindPoints();
+
+        // Begin Timer.
+        startClock();
     }
 
+    // Method for setting the questions and answer texts.
+    private void bindTextToState() {
+        objectLabel1.textProperty().bindBidirectional(qState.object1);
+        objectLabel2.textProperty().bindBidirectional(qState.object2);
+        answerLabel1.textProperty().bindBidirectional(qState.answer1);
+        answerLabel2.textProperty().bindBidirectional(qState.answer2);
+        answerLabel3.textProperty().bindBidirectional(qState.answer3);
+        answerLabel4.textProperty().bindBidirectional(qState.answer4);
+    }
+
+
+    // Binds JavaFX pointsLabel to score.
     private void bindPoints() {
         pointsLabel.textProperty().setValue(String.valueOf(this.points));
     }
@@ -65,16 +83,6 @@ public class ApplicationController {
         }
     }
 
-    // Method for setting the questions and answer texts.
-    private void bindTextToState() {
-        objectLabel1.textProperty().bindBidirectional(qState.object1);
-        objectLabel2.textProperty().bindBidirectional(qState.object2);
-        answerLabel1.textProperty().bindBidirectional(qState.answer1);
-        answerLabel2.textProperty().bindBidirectional(qState.answer2);
-        answerLabel3.textProperty().bindBidirectional(qState.answer3);
-        answerLabel4.textProperty().bindBidirectional(qState.answer4);
-    }
-
     // Method for pressing answer button.
     public void submitAnswer(ActionEvent event) {
         String answerSelected = ((Button)event.getSource()).getText();
@@ -92,10 +100,12 @@ public class ApplicationController {
         }
     }
 
+    // Returns computed answer as String.
     private String calculateAnswer(QuestionAndAnswerState state) {
         return state.getCorrectAnswer();
     }
 
+    // Method for selecting correct response.
     private void correctAnswer() {
         points += 1;
         addToStack(true);
@@ -103,11 +113,13 @@ public class ApplicationController {
 //        resetClock();
     }
 
+    // Method for selecting incorrect response.
     private void incorrectAnswer() {
         addToStack(false);
 //        resetClock();
     }
 
+    // Adds timestamp info to stack. Takes boolean as parameter whether response was correct or not.
     private void addToStack(boolean isCorrect) {
         String userQuestionNumber = String.valueOf(qState.getQuestionNumber() + 1);
         String questionNumberString;
@@ -124,12 +136,13 @@ public class ApplicationController {
         timeStamps.push(result);
     }
 
+    // Method for finalizing quiz after question 10.
     private void finishQuiz() {
-        System.out.println("Quiz Finished.");
         addStackToVbox();
         db.insertUserScore(this.name, this.points);
     }
 
+    // Method for adding Stack values to Front-end.
     private void addStackToVbox() {
         for (String timeStamp: timeStamps) {
             Text text = new Text(timeStamp);
@@ -137,10 +150,12 @@ public class ApplicationController {
         }
     }
 
+    // Accessing top ten users.
     public void generateReport() {
         openReportWindow(db.getTopTen());
     }
 
+    // Configures pop up report window.
     private void openReportWindow(String results) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

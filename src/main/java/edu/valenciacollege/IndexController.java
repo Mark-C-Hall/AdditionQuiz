@@ -14,6 +14,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/*
+ * Controller class for handling the first index scene.
+ */
 public class IndexController {
     @FXML TextField nameField;
 

@@ -2,8 +2,7 @@ package edu.valenciacollege;
 
 import javafx.beans.property.SimpleStringProperty;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -28,26 +27,18 @@ public class QuestionAndAnswerState {
     private ArrayList<ArrayList<Object>> listOfQuestionsAndAnswers;
     private Scanner scanner;
 
-    QuestionAndAnswerState() throws IOException {
+    QuestionAndAnswerState() {
+        try {
+            File file = new File("C:\\input.txt");
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
         listOfQuestionsAndAnswers = new ArrayList<>();
-        File file = getFileFromResource();
-        scanner = new Scanner(file);
         listOfQuestionsAndAnswers = getAllQuestionsAndAnswers();
         setQuestionsAndAnswers(
                 produceQuestionAndAnswerList(
                         listOfQuestionsAndAnswers));
-    }
-
-    // Load text file from Resource Folder.
-    private File getFileFromResource() {
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        URL resource = classLoader.getResource("input.txt");
-        if (resource == null) {
-            throw new IllegalArgumentException("file is not found!");
-        } else {
-            return new File(resource.getFile());
-        }
     }
 
     /*

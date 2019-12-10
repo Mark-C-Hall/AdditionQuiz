@@ -1,13 +1,17 @@
 package edu.valenciacollege;
 
-import javax.swing.*;
 import java.sql.*;
 
+/*
+ * Class for constructing and handling Database. NOTE: I didn't have access to create file in C drive directly, so I
+ * opted to make a folder "databases" in C drive instead using file explorer.
+ */
 public class QuizDatabase {
     private String url = "jdbc:sqlite:C:\\databases\\additionQuiz.db";
     private Connection connection = null;
     private Statement statement = null;
 
+    // Creates new Database and configures table.
     public void connectToDb()  {
         try  {
             connection = DriverManager.getConnection(url);
@@ -21,7 +25,6 @@ public class QuizDatabase {
                 // Execute Statements
                 statement = connection.createStatement();
                 statement.executeUpdate(createString);
-                System.out.println("Table has been created.");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -36,6 +39,7 @@ public class QuizDatabase {
         }
     }
 
+    // Adds data to Database.
     public void insertUserScore(String name, int score) {
         try {
             // Connect to db.
@@ -48,7 +52,6 @@ public class QuizDatabase {
             preparedStatement.setString(1, name);
             preparedStatement.setInt(2, score);
             preparedStatement.executeUpdate();
-            System.out.println("Entry has been added.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -63,6 +66,7 @@ public class QuizDatabase {
         }
     }
 
+    // Retrieves top 10 users by Score.
     public String getTopTen() {
         StringBuilder resultString = new StringBuilder();
         // Create Connection.
