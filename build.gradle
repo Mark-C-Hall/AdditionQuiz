@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'edu.valenciacollege'
-version '1.0-SNAPSHOT'
+version 'final'
 
 sourceCompatibility = 1.8
 

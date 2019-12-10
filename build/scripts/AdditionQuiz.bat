@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\AdditionQuiz-1.0-SNAPSHOT.jar;%APP_HOME%\lib\javafx-fxml-13-win.jar;%APP_HOME%\lib\javafx-controls-13-win.jar;%APP_HOME%\lib\javafx-controls-13.jar;%APP_HOME%\lib\javafx-graphics-13-win.jar;%APP_HOME%\lib\javafx-graphics-13.jar;%APP_HOME%\lib\javafx-base-13-win.jar;%APP_HOME%\lib\javafx-base-13.jar
+set CLASSPATH=%APP_HOME%\lib\AdditionQuiz-final.jar;%APP_HOME%\lib\sqlite-jdbc-3.27.2.1.jar;%APP_HOME%\lib\javafx-fxml-13-win.jar;%APP_HOME%\lib\javafx-controls-13-win.jar;%APP_HOME%\lib\javafx-controls-13.jar;%APP_HOME%\lib\javafx-graphics-13-win.jar;%APP_HOME%\lib\javafx-graphics-13.jar;%APP_HOME%\lib\javafx-base-13-win.jar;%APP_HOME%\lib\javafx-base-13.jar
 
 @rem Execute AdditionQuiz
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %ADDITION_QUIZ_OPTS%  -classpath "%CLASSPATH%" edu.valenciacollege.MainApp %CMD_LINE_ARGS%

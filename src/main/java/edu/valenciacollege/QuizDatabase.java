@@ -7,7 +7,7 @@ import java.sql.*;
  * opted to make a folder "databases" in C drive instead using file explorer.
  */
 public class QuizDatabase {
-    private String url = "jdbc:sqlite:C:\\databases\\additionQuiz.db";
+    private String url = "jdbc:sqlite:C:\\additionQuiz.db";
     private Connection connection = null;
     private Statement statement = null;
 
