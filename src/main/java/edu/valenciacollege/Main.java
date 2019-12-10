@@ -34,7 +34,4 @@ public class Main extends Application {
 }
 
 // TODO Next question if time runs out
-// TODO Final question
-// TODO Stack answers
-// TODO Database
 // TODO Clean Code
