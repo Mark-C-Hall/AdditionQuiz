@@ -2,19 +2,24 @@ package edu.valenciacollege;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
+import java.util.Stack;
 
 public class ApplicationController {
     @FXML Text nameLabel, timeLabel, pointsLabel;
     @FXML Text objectLabel1, objectLabel2;
     @FXML Button answerLabel1, answerLabel2, answerLabel3, answerLabel4;
+    @FXML VBox vbox;
+
     String name;
     int points;
     Countdown countdown;
     QuestionAndAnswerState qState;
+    Stack<String> timeStamps;
 
     // Starting Parameters for first question.
     void initialize(String name) {
@@ -29,6 +34,7 @@ public class ApplicationController {
             System.out.println("Caught: " + e.getMessage());
         }
         bindPoints();
+        timeStamps = new Stack<>();
     }
 
     private void bindPoints() {
@@ -61,30 +67,6 @@ public class ApplicationController {
         answerLabel4.textProperty().bindBidirectional(qState.answer4);
     }
 
-    private String calculateAnswer(QuestionAndAnswerState state) {
-        return state.getCorrectAnswer();
-    }
-
-    private void correctAnswer() {
-        points += 1;
-        if (points > 10) {
-            finishQuiz();
-        } else {
-            qState.newQuestion();
-            bindPoints();
-        }
-//        resetClock();
-    }
-
-    private void finishQuiz() {
-        System.out.println("Quiz Finished.");
-    }
-
-    private void incorrectAnswer() {
-        qState.newQuestion();
-//        resetClock();
-    }
-
     // Method for pressing answer button.
     public void submitAnswer(ActionEvent event) {
         String answerSelected = ((Button)event.getSource()).getText();
@@ -93,6 +75,56 @@ public class ApplicationController {
             correctAnswer();
         } else {
             incorrectAnswer();
+        }
+        // Check for final question.
+        if (qState.getQuestionNumber() == 9) {
+            finishQuiz();
+        } else {
+            qState.newQuestion();
+        }
+    }
+
+    private String calculateAnswer(QuestionAndAnswerState state) {
+        return state.getCorrectAnswer();
+    }
+
+    private void correctAnswer() {
+        points += 1;
+        addToStack(true);
+        bindPoints();
+//        resetClock();
+    }
+
+    private void incorrectAnswer() {
+        addToStack(false);
+//        resetClock();
+    }
+
+    private void addToStack(boolean isCorrect) {
+        String userQuestionNumber = String.valueOf(qState.getQuestionNumber() + 1);
+        String questionNumberString;
+        if (isCorrect) {
+            questionNumberString = "Question " + userQuestionNumber + ": Correct!\n";
+        } else {
+            questionNumberString = "Question " + userQuestionNumber + ": Incorrect!\n";
+        }
+        String pointsString = "Points: " + points + "\t";
+        String timeStampString = "Time: " + timeLabel.getText() + "\n";
+
+        String result = questionNumberString + pointsString + timeStampString;
+
+        timeStamps.push(result);
+    }
+
+    private void finishQuiz() {
+        System.out.println("Quiz Finished.");
+        addStackToVbox();
+    }
+
+    private void addStackToVbox() {
+        for (String timeStamp: timeStamps) {
+            Text text = new Text(timeStamp);
+            vbox.getChildren().add(text);
         }
     }
 }

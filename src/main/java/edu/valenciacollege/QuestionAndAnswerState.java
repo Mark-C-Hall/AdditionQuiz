@@ -177,4 +177,6 @@ public class QuestionAndAnswerState {
     public String getCorrectAnswer() {
         return this.correctAnswer;
     }
+
+    public int getQuestionNumber() { return this.questionNumber; }
 }
