@@ -75,12 +75,9 @@ public class ApplicationController {
 
     // Ends current thread and starts new one.
     private void resetClock() {
-        try {
-            countdown.stop();
-            startClock();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        countdown.stop();
+        countdown = new Countdown();
+        timeLabel.textProperty().bindBidirectional(countdown.timeProperty);
     }
 
     // Method for pressing answer button.
@@ -110,13 +107,13 @@ public class ApplicationController {
         points += 1;
         addToStack(true);
         bindPoints();
-//        resetClock();
+        resetClock();
     }
 
     // Method for selecting incorrect response.
     private void incorrectAnswer() {
         addToStack(false);
-//        resetClock();
+        resetClock();
     }
 
     // Adds timestamp info to stack. Takes boolean as parameter whether response was correct or not.

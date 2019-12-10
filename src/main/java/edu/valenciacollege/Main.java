@@ -31,6 +31,3 @@ public class Main extends Application {
         launch(args);
     }
 }
-
-// TODO Next question if time runs out
-// TODO Clean Code
